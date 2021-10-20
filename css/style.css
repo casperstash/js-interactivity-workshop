@@ -7,7 +7,7 @@ body{
     width: 100vw;
     height: 100vh;
 }
-.img-box{
+#img-box{
     position:absolute;
     width:400px;
     height:400px;
@@ -15,4 +15,8 @@ body{
     background-color:cyan;
     left: 50%;
     transform: translateX(-50%)
+}
+#cat{
+    transition: margin-top 0.5s;
+    margin-top:0px;
 }
