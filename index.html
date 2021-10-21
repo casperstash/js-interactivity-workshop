@@ -6,7 +6,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
-<div id="img-box" onclick="randomColor()">
+<div id="img-box" onclick="randomColor(); ">
     <svg id="cat" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 400 400" style="enable-background:new 0 0 400 400; margin-top:0px" xml:space="preserve">
         <g id="cat-body">
@@ -80,7 +80,57 @@
     </svg>
 </div>
 <script>
+    const imgBox = document.getElementById('img-box');
+    imgBox.addEventListener('click', moveCat);
+    const cat = document.getElementById('cat');
+    function moveCat(){
+        //console.log(cat);  
+        if(cat.style.marginTop == '100%'){
+           // console.log("margin is at 100");
+            cat.style.marginTop = '0px';
+        }else {
+            cat.style.marginTop = '100%';
+            //console.log("margin is at 0");
+        }
+    }
 
+    function randomColor(){
+        let red = Math.floor(Math.random()*256);
+        let green = Math.floor(Math.random()*256);
+        let blue = Math.floor(Math.random()*256);
+        console.log(red+','+green+','+blue);
+        imgBox.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+    }
+
+    imgBox.addEventListener('mouseover',function(event){    
+        hoverFunction(event);
+        //console.log(event);
+    });
+const nose = document.getElementById('nose');
+
+    function hoverFunction(event){
+        let xPos = event.clientX;
+        let yPos = event.clientY;
+
+        let boxLocation = imgBox.getBoundingClientRect();
+        let boxX = boxLocation.x;
+        let boxY = boxLocation.y;
+
+        let mouseX = xPos - boxX;
+        let mouseY = yPos - boxY;
+       // console.log('mouse:'+xPos+','+yPos);
+       // console.log('box location:'+boxX+','+boxY);
+       // console.log('relativee mouse:'+mouseX+','+mouseY);
+
+        let nosePos = nose.getBBox();
+        let noseX = nosePos.x;
+        let noseY = nosePos.y;
+
+        let realX = mouseX - noseX;
+        let realY = mouseY - noseY;
+
+        nose.setAttribute('transform','translate('+realX+','+realY+')');
+    }
 
 </script> 
 
